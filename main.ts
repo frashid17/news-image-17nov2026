@@ -1,18 +1,15 @@
 /**
- * make.fun news-image-20261117
- * Copies Tuesday 17 November 2026 world-news board image to the grader output.
- * Node 22, standard library only. Deterministic across two runs.
+ * make.fun news-image-20261117 — Tuesday 17 November 2026 world day sheet.
+ * Deterministic copy of the repository entry.png into the sandbox output path.
  */
-
 import { copyFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const IMAGE_NAME = "entry.png" as const;
-const sourcePath = fileURLToPath(new URL(`./${IMAGE_NAME}`, import.meta.url));
-const outputDirectory = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
-const destinationPath = join(outputDirectory, IMAGE_NAME);
+const ENTRY = "entry.png" as const;
+const source = fileURLToPath(new URL(`./${ENTRY}`, import.meta.url));
+const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const dest = join(outDir, ENTRY);
 
-// Ensure the output folder exists before the deterministic copy.
-mkdirSync(dirname(destinationPath), { recursive: true });
-copyFileSync(sourcePath, destinationPath);
+mkdirSync(dirname(dest), { recursive: true });
+copyFileSync(source, dest);
