@@ -11,5 +11,6 @@ const source = fileURLToPath(new URL(`./${ENTRY}`, import.meta.url));
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 const dest = join(outDir, ENTRY);
 
+// Ensure /output exists, then copy the day-sheet bytes unchanged.
 mkdirSync(dirname(dest), { recursive: true });
 copyFileSync(source, dest);
